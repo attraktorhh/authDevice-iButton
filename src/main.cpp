@@ -1,6 +1,8 @@
 #include "main.h"
 
+#ifndef DEVICE_ID
 #define DEVICE_ID 0
+#endif
 
 #ifndef RELAY_ON_TIME
 #define RELAY_ON_TIME 5000
@@ -28,7 +30,7 @@ int hdlc_read_byte();
 void hdlc_write_byte(uint8_t data);
 void hdlc_message_handler(uint8_t *data, uint16_t length);
 
-HDLC<hdlc_read_byte, hdlc_write_byte, 16, CRC16_CCITT> hdlc;
+HDLC<&hdlc_read_byte, &hdlc_write_byte, 16, CRC16_CCITT> hdlc;
 IButtonReader ibutton_reader(PIN_1WIRE, IBUTTON_SEARCH_INTERVAL, IBUTTON_KEEP_INTERVAL);
 
 unsigned long previous_millis;
